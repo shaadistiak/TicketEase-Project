@@ -39,7 +39,7 @@ for (let i = 0; i < seatnum.length; i++) {
 
         totalPrice += seatPrice;
         updatePrices();
-
+        console.log(seatarr)
         document.getElementById('totalseat').innerText = String(40 - seatarr.length);
         document.getElementById('seat_Selected').innerText = String(seatarr.length);
 
@@ -79,6 +79,8 @@ for (let i = 0; i < seatnum.length; i++) {
     });
 }
 
+
+
 applyButton.addEventListener('click', function () {
     const couponCode = couponInput.value.trim().toLowerCase();
 
@@ -104,6 +106,9 @@ applyButton.addEventListener('click', function () {
 
 function updatePrices() {
     const grandTotal = totalPrice - discount;
+    localStorage.setItem('totalPrice',JSON.stringify(totalPrice))
+    localStorage.setItem('discount',JSON.stringify(discount))
+    
     maxPrice.textContent = `BDT ${(totalPrice)}`;
     maxTotal.textContent = `BDT ${(grandTotal)}`;
 }
@@ -129,6 +134,7 @@ phoneInput.addEventListener('input', validateInputs);
 
 nextButton.addEventListener('click', function () {
 
+    localStorage.setItem('selectedSeats',JSON.stringify(seatarr))
     if(nameInput.value && phoneInput.value && seatarr.length>0){
 
     bodySec.classList.add('hidden');

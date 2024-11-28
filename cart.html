@@ -169,6 +169,7 @@
     const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats")) || [];
     const discount = parseFloat(localStorage.getItem("discount")) || 0;
 
+    console.log(selectedSeats)
     const cartItemsContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
     const discountSection = document.getElementById("discount-section");
@@ -198,22 +199,22 @@
       selectedSeats.forEach((seat) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td class="border-b border-gray-300 py-2">${seat.name}</td>
-          <td class="border-b border-gray-300 py-2">$${seat.price.toFixed(2)}</td>
+          <td class="border-b border-gray-300 py-2">${seat}</td>
+          <td class="border-b border-gray-300 py-2">$550</td>
         `;
         cartItemsContainer.appendChild(row);
-        totalPrice += seat.price;
+        totalPrice = localStorage.getItem('totalPrice')
       });
 
       // Update pricing details
       const grandTotal = totalPrice - discount;
 
-      totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+      totalPriceElement.textContent = `$${totalPrice}`;
       if (discount > 0) {
         discountSection.classList.remove("hidden");
-        discountAmountElement.textContent = `-$${discount.toFixed(2)}`;
+        discountAmountElement.textContent = `-$${discount}`;
       }
-      grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
+      grandTotalElement.textContent = `$${grandTotal}`;
     }
 
     // Cancel button event
